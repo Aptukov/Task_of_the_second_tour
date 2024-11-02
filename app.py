@@ -10,7 +10,7 @@ Authorization_key = input('Введите ваш ключ авторизации
 chat = GigaChat(credentials=Authorization_key, scope='GIGACHAT_API_PERS', model='GigaChat', streaming=True)
 
 # Заголовок приложения
-st.title("Резюме статей из PDF")
+st.title("Приложение для резюмирования научных статей в формате PDF")
 
 # Загрузка файла
 uploaded_file = st.file_uploader("Загрузите PDF-файл", type="pdf")
@@ -18,7 +18,7 @@ uploaded_file = st.file_uploader("Загрузите PDF-файл", type="pdf")
 
 # Функция для извлечения текста из PDF
 def extract_text_from_pdf(file):
-    doc = fitz.open(stream=file.read(), filetype="pdf")  # Открываем PDF-файл из потока
+    doc = fitz.open(stream=file.read(), filetype="pdf")  # Открываем PDF-файл
     text = ""
     for page in doc:
         text += page.get_text()  # Извлекаем текст из каждой страницы
