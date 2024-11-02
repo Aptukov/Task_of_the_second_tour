@@ -5,9 +5,9 @@ import tempfile
 from langchain.schema import HumanMessage, SystemMessage
 from langchain_community.chat_models.gigachat import GigaChat
 
+Authorization_key = input('Введите ваш ключ авторизации Gigachat API')
 # Авторизация в сервисе GigaChat
-chat = GigaChat(credentials='YWViNGExYjItODMwOC00MWM0LWJiZTgtYTk4ZGU4ZmUxMzhhOjEzMjNkMGNhLTI0YzctNDIyNC04Y2E2LWQ3YTIwOGFjZWNjZQ==',
-                scope='GIGACHAT_API_PERS', model='GigaChat', streaming=True)
+chat = GigaChat(credentials=Authorization_key, scope='GIGACHAT_API_PERS', model='GigaChat', streaming=True)
 
 # Заголовок приложения
 st.title("Резюме статей из PDF")
