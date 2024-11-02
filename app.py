@@ -5,12 +5,14 @@ import tempfile
 from langchain.schema import HumanMessage, SystemMessage
 from langchain_community.chat_models.gigachat import GigaChat
 
-Authorization_key = input('Введите ваш ключ авторизации Gigachat API')
-# Авторизация в сервисе GigaChat
-chat = GigaChat(credentials=Authorization_key, scope='GIGACHAT_API_PERS', model='GigaChat', streaming=True)
-
 # Заголовок приложения
 st.title("Приложение для резюмирования научных статей в формате PDF")
+
+# Получение ключа авторизации пользователя
+Authorization_key = st.text_area('Введите ваш ключ авторизации Gigachat API')
+
+# Авторизация в сервисе GigaChat
+chat = GigaChat(credentials=Authorization_key, scope='GIGACHAT_API_PERS', model='GigaChat', streaming=True)
 
 # Загрузка файла
 uploaded_file = st.file_uploader("Загрузите PDF-файл", type="pdf")
@@ -24,23 +26,26 @@ def extract_text_from_pdf(file):
         text += page.get_text()  # Извлекаем текст из каждой страницы
     return text
 
-
 if uploaded_file is not None:
-    # Извлечение текста из PDF
-    full_text = extract_text_from_pdf(uploaded_file)
+    try:
+        # Извлечение текста из PDF
+        full_text = extract_text_from_pdf(uploaded_file)
 
-    # Проверяем длину текста
-    if full_text:
-        messages = [
-            SystemMessage(content="Вы являетесь помощником для резюмирования текста. Выдавайте ответы всегда на русском, независимо от языка самой статьи. Используйте не болeе 400 слов и будьте лаконичны в ответе."),
-            HumanMessage(content=full_text)
-        ]
+        # Проверяем длину текста
+        if full_text:
+            messages = [
+                SystemMessage(content="Вы являетесь помощником для резюмирования текста. Выдавайте ответы всегда на русском, независимо от языка самой статьи. Используйте не болeе 200 слов и будьте лаконичны в ответе."),
+                HumanMessage(content=full_text)
+            ]
 
-        # Получаем краткое содержание
-        res = chat(messages)
+            # Получаем краткое содержание
+            res = chat(messages)
 
-        # Вывод ответа
-        st.subheader("Краткое резюме:")
-        st.write(res.content)
-    else:
-        st.write("Не удалось извлечь текст из PDF.")
+            # Вывод ответа
+            st.subheader("Краткое резюме:")
+            st.write(res.content)
+        else:
+            st.write("Не удалось извлечь текст из PDF.")
+
+    except Exception as e:
+        st.subheader('Вы не ввели свой ключ авторизации, либо он неверный.')
