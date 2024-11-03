@@ -16,17 +16,11 @@
 #### Установка
 1. Клонируйте репозиторий:
    ```bash
-   git clone https://github.com/Aptukov/Task_of_the_second_tour.git
+   Скачайте ZIP-архив проекта
    ```
 2. Установите необходимые пакеты:
    ```bash
    pip install -r requirements.txt
-   ```
-
-3. Измените URL удаленного репозитория, чтобы избежать случайных пушей в базовый проект:
-   ```bash
-   git remote set-url origin github_username/repo_name
-   git remote -v # подтвердите изменения
    ```
 ### Использование
 1. Запустите приложение через терминал:
