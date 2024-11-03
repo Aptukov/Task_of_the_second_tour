@@ -12,7 +12,7 @@ st.title("Приложение для резюмирования научных 
 Authorization_key = st.text_area('Введите ваш ключ авторизации Gigachat API')
 
 # Авторизация в сервисе GigaChat
-chat = GigaChat(credentials=Authorization_key, scope='GIGACHAT_API_PERS', model='GigaChat', streaming=True)
+chat = GigaChat(credentials=Authorization_key, scope='GIGACHAT_API_PERS', model='GigaChat', streaming=True, verify_ssl_certs=False)
 
 # Загрузка файла
 uploaded_file = st.file_uploader("Загрузите PDF-файл", type="pdf")
