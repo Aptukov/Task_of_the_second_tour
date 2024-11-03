@@ -16,8 +16,9 @@
 #### Установка
 1. Клонируйте репозиторий:
    ```bash
-   Скачайте ZIP-архив проекта
+   git clone https://github.com/Aptukov/Task_of_the_second_tour
    ```
+2. Привяжите репозиторий к своей среде разработки
 2. Установите необходимые пакеты:
    ```bash
    pip install -r requirements.txt
